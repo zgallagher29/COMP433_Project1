@@ -2,7 +2,7 @@ package src.main.client;
 
 import java.util.Set;
 
-import src.main.dal.CustomerManager;
+import src.main.CustomerManager;
 import src.main.model.Customer;
 
 public class TestClient {

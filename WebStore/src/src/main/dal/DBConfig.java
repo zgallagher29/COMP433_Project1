@@ -11,7 +11,7 @@ public class DBConfig {
 		username="admin";
 		password="wspadmin2018";
 		databaseURL="jdbc:mysql://webservicesprogramming.c4dunx0x7upy.us-east-2.rds.amazonaws.com:3306";
-		databaseName="webservicesprogramming";
+		databaseName="webservicesprogramming?useSSL=false";
 	}
 	
 	public String getUsername() {

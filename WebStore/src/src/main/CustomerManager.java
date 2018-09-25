@@ -1,7 +1,7 @@
-package src.main.dal;
+package src.main;
 
+import src.main.dal.*;
 import java.util.Set;
-
 import src.main.model.Customer;
 
 public class CustomerManager {
