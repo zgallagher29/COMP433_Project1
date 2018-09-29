@@ -8,6 +8,14 @@ public class Address {
 	String state;
 	int zip;
 	int ID;
+	int customerId;
+	
+	public int getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
 	public String getStreetName() {
 		return streetName;
 	}

@@ -4,10 +4,18 @@ import java.util.Date;
 
 public class BillingInformation {
 	int ID;
+	int customerId;
 	int cardNumber;
 	Date expirationDate;
 	int securityCode;
 	String nameOnCard;
+	
+	public int getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
 	public int getID() {
 		return ID;
 	}

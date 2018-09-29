@@ -1,10 +1,20 @@
 package src.main.model;
 
+import java.util.Date;
+
 public class Order {
 	int ID;
 	int customerId;
 	int sellerId;
 	int productId;
+	Date orderDate;
+	
+	public Date getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
 	public int getID() {
 		return ID;
 	}
