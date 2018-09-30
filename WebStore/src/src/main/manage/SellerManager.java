@@ -1,4 +1,4 @@
-package src.main;
+package src.main.manage;
 
 import src.main.dal.*;
 import java.util.Set;

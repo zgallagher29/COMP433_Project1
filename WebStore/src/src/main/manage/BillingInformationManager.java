@@ -1,4 +1,4 @@
-package src.main;
+package src.main.manage;
 
 import java.util.Date;
 import java.util.Set;
@@ -18,7 +18,7 @@ public class BillingInformationManager {
 		return dao.getBillingInformation(id);
 	}
 
-	public BillingInformation addBillingInformation(int cardNumber, int customerId, Date expirationDate, String nameOnCard, int securityCode) {
+	public BillingInformation addBillingInformation(String cardNumber, int customerId, Date expirationDate, String nameOnCard, int securityCode) {
 
 		BillingInformation BillingInformation = dao.addBillingInformation(cardNumber, customerId, expirationDate, nameOnCard, securityCode);
 
@@ -32,4 +32,5 @@ public class BillingInformationManager {
 	public void deleteBillingInformation(int id) {
 		dao.deleteBillingInformation(id);
 	}
+	
 }

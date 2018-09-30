@@ -7,6 +7,13 @@ public class Product {
 	String name;
 	int quantity;
 	int sellerId;
+	
+	public void print() {
+		System.out.println("\nProduct Name: " + this.name);
+		System.out.println("Category: " + this.category);
+		System.out.println("Quantity: " + this.quantity);
+		System.out.println("Seller ID: " + this.sellerId);
+	}
 	public int getID() {
 		return ID;
 	}

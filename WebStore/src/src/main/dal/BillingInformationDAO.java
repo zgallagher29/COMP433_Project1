@@ -28,7 +28,7 @@ public class BillingInformationDAO {
 
 			BillingInformation.setID(resultSet.getInt("ID"));
 			BillingInformation.setCustomerId(resultSet.getInt("CustomerId"));
-			BillingInformation.setCardNumber(resultSet.getInt("CreditCardNumber"));
+			BillingInformation.setCardNumber(resultSet.getString("CreditCardNumber"));
 			BillingInformation.setSecurityCode(resultSet.getInt("SecurityCode"));
 			BillingInformation.setNameOnCard(resultSet.getString("NameOnCard"));
 			BillingInformation.setExpirationDate(resultSet.getDate("ExpirationDate"));
@@ -80,7 +80,7 @@ public class BillingInformationDAO {
 		return BillingInformations;
 	}
 
-	public BillingInformation addBillingInformation(int cardNumber, int customerId, Date expirationDate, String nameOnCard, int securityCode) {
+	public BillingInformation addBillingInformation(String cardNumber, int customerId, Date expirationDate, String nameOnCard, int securityCode) {
 
 		BillingInformation BillingInformation = new BillingInformation();
 		Random randomGenerator = new Random();

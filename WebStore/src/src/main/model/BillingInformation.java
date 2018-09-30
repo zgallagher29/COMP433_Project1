@@ -5,10 +5,17 @@ import java.util.Date;
 public class BillingInformation {
 	int ID;
 	int customerId;
-	int cardNumber;
+	String cardNumber;
 	Date expirationDate;
 	int securityCode;
 	String nameOnCard;
+	
+	public void print() {
+		System.out.println("\nName on Card:" + this.nameOnCard);
+		System.out.println("Card Number: " + this.cardNumber);
+		System.out.println("Expiration Date: " + this.expirationDate);
+		System.out.println("Security Code: " + this.securityCode);	
+	}
 	
 	public int getCustomerId() {
 		return customerId;
@@ -22,10 +29,10 @@ public class BillingInformation {
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public int getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
-	public void setCardNumber(int cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 	public Date getExpirationDate() {

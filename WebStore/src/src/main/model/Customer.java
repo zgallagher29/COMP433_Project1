@@ -5,6 +5,27 @@ public class Customer {
 	int id;
 	String firstName;
 	String lastName;
+	Address address;
+	BillingInformation billingInformation;
+	
+	public void print() {
+		System.out.println("\nCustomer Name: " + this.firstName + " " + this.lastName);		
+		this.address.print();
+		this.billingInformation.print();
+	}
+	
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	public BillingInformation getBillingInformation() {
+		return billingInformation;
+	}
+	public void setBillingInformation(BillingInformation billingInformation) {
+		this.billingInformation = billingInformation;
+	}
 	
 	public int getId() {
 		return id;

@@ -59,4 +59,12 @@ public class Address {
 		ID = iD;
 	}
 	
+	public void print() {
+		System.out.println("\nStreet Name: " + this.streetName);
+		System.out.println("Street Name Two: " + this.streetNameTwo);
+		System.out.println("City: " + this.city);
+		System.out.println("State: " + this.state);
+		System.out.println("Zip: " + this.zip);
+		System.out.println("Country: " + this.country);
+	}
 }

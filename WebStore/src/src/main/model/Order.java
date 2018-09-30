@@ -4,11 +4,19 @@ import java.util.Date;
 
 public class Order {
 	int ID;
-	int customerId;
-	int sellerId;
-	int productId;
+	Customer customer;
+	Seller seller;
+	Product product;
 	Date orderDate;
 	
+	public void print() {
+		
+		System.out.println("\nOrder:" + this.ID);
+		System.out.println("Order Date: " + this.orderDate.toString());
+		this.customer.print();
+		this.product.print();
+		
+	}
 	public Date getOrderDate() {
 		return orderDate;
 	}
@@ -21,23 +29,24 @@ public class Order {
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public int getCustomerId() {
-		return customerId;
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
-	public int getSellerId() {
-		return sellerId;
+	public Seller getSeller() {
+		return seller;
 	}
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
-	public int getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
+
 	
 }

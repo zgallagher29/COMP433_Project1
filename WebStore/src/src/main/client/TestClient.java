@@ -1,24 +1,29 @@
 package src.main.client;
 
+import java.sql.Date;
+import java.util.Iterator;
 import java.util.Set;
 
-import src.main.CustomerManager;
+import src.main.manage.*;
+import src.main.model.*;
 import src.main.model.Customer;
 
 public class TestClient {
 
 	public static void main(String args[]) {
 		
-		CustomerManager manager = new CustomerManager();
+		CustomerManager c = new CustomerManager();
+		Set<Customer> customers = c.getAllCustomers();
 		
-		//manager.addCustomer("Zac", "Gallagher");
+		OrderManager om = new OrderManager();
+		Set<Order> orders = om.getAllOrders();
 		
-		Set<Customer> customers = manager.getAllCustomers();
-		
-		if (!customers.isEmpty()) {
-			System.out.println(customers.iterator().next().getFirstName());
+		if (!orders.isEmpty()) {
+			for (Iterator<Order> it = orders.iterator(); it.hasNext(); ) {
+				Order order = it.next();
+				order.print();
+			}
 			
-		}
-		
+		}		
 	}
 }

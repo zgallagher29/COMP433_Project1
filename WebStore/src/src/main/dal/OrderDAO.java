@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.ZoneId;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
-
-import src.main.model.Order;
+import src.main.model.*;
 
 public class OrderDAO {
 	
@@ -28,9 +27,15 @@ public class OrderDAO {
 
 			Order.setID(resultSet.getInt("ID"));
 			Order.setOrderDate(resultSet.getDate("OrderDate"));
-			Order.setCustomerId(resultSet.getInt("CustomerId"));
-			Order.setProductId(resultSet.getInt("ProductId"));
-			Order.setSellerId(resultSet.getInt("SellerId"));
+			
+			int custId = resultSet.getInt("CustomerId");
+			Order.setCustomer(getCustomerById(custId));
+			
+			int productId = resultSet.getInt("ProductId");
+			Order.setProduct(getProductById(productId));
+			
+			int sellerId = resultSet.getInt("SellerId");
+			Order.setSeller(getSellerById(sellerId));
 
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -44,6 +49,39 @@ public class OrderDAO {
 		}
 
 		return Order;
+	}
+
+	private Seller getSellerById(int sellerId) {
+		SellerDAO dao = new SellerDAO();
+		for (Iterator<Seller> it = dao.getAllSellers().iterator(); it.hasNext(); ) {
+			Seller currentSeller = it.next();
+			if (currentSeller.getID() == sellerId) {
+				return currentSeller;
+			}
+		}
+		return null;
+	}
+
+	private Product getProductById(int productId) {
+		ProductDAO dao = new ProductDAO();
+		for (Iterator<Product> it = dao.getAllProducts().iterator(); it.hasNext(); ) {
+			Product currentProduct = it.next();
+			if (currentProduct.getID() == productId) {
+				return currentProduct;
+			}
+		}
+		return null;
+	}
+
+	private Customer getCustomerById(int custId) {
+		CustomerDAO dao = new CustomerDAO();
+		for (Iterator<Customer> it = dao.getAllCustomers().iterator(); it.hasNext(); ) {
+			Customer currentCust = it.next();
+			if (currentCust.getId() == custId) {
+				return currentCust;
+			}
+		}
+		return null;
 	}
 
 	public Set<Order> getAllOrders() {
@@ -87,9 +125,6 @@ public class OrderDAO {
 		
 		Order.setID(randomInt);
 		Order.setOrderDate(orderDate);
-		Order.setCustomerId(customerId);
-		Order.setSellerId(sellerId);
-		Order.setProductId(productId);
 		
 		Connection connection = DBConnection.getDatabaseConnection();
 
@@ -97,8 +132,8 @@ public class OrderDAO {
 			Statement insertStatement = connection.createStatement();
 
 			String insertQuery = "INSERT INTO Orders (ID,OrderDate,CustomerId,ProductId,SellerId)" + "VALUES(" + Order.getID() + ",'"
-					+ Order.getOrderDate().toInstant().atZone(ZoneId.of("America/Chicago")).toLocalDate() + "'," + Order.getCustomerId() 
-					+ "," + Order.getProductId() + "," + Order.getSellerId() + ")";
+					+ Order.getOrderDate() + "'," + customerId 
+					+ "," + productId + "," + sellerId + ")";
 			insertStatement.executeUpdate(insertQuery);
 
 		} catch (SQLException se) {

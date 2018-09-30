@@ -102,7 +102,7 @@ public class AddressDAO {
 
 			String insertQuery = "INSERT INTO Address (ID,Street,StreetTwo,City,State,Zip,Country,CustomerId)"
 					+ "VALUES(" + address.getID() + ",'" + address.getStreetName() + "','" + address.getStreetNameTwo()
-					+ "','" + address.getCity() + "','" + address.getState() + "'," + address.getZip() + "','"
+					+ "','" + address.getCity() + "','" + address.getState() + "'," + address.getZip() + ",'"
 					+ address.getCountry() + "'," + address.getCustomerId() + ")";
 			insertStatement.executeUpdate(insertQuery);
 

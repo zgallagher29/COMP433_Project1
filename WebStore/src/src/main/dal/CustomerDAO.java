@@ -2,9 +2,12 @@ package src.main.dal;
 
 import java.sql.*;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
+import src.main.model.Address;
+import src.main.model.BillingInformation;
 import src.main.model.Customer;
 
 public class CustomerDAO {
@@ -22,9 +25,12 @@ public class CustomerDAO {
 			ResultSet resultSet = selectStatement.executeQuery(selectQuery);
 			resultSet.next();
 
+			customer.setId(id);
 			customer.setLastName(resultSet.getString("lastName"));
-			customer.setFirstName(resultSet.getString("firstName"));
-
+			customer.setFirstName(resultSet.getString("firstName"));		
+			customer.setAddress(getAddressByCustId(id));
+			customer.setBillingInformation(getBillingInfoByCustId(id));
+			
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} finally {
@@ -37,6 +43,28 @@ public class CustomerDAO {
 		}
 
 		return customer;
+	}
+
+	private BillingInformation getBillingInfoByCustId(int customerId) {
+		BillingInformationDAO dao = new BillingInformationDAO();
+		for (Iterator<BillingInformation> it = dao.getAllBillingInformations().iterator(); it.hasNext(); ) {
+			BillingInformation currentBillingInfo = it.next();
+			if (currentBillingInfo.getCustomerId() == customerId) {
+				return currentBillingInfo;
+			}
+		}
+		return null;
+	}
+
+	private Address getAddressByCustId(int customerId) {
+		AddressDAO dao = new AddressDAO();
+		for (Iterator<Address> it = dao.getAllAddresses().iterator(); it.hasNext(); ) {
+			Address currentAddress = it.next();
+			if (currentAddress.getCustomerId() == customerId) {
+				return currentAddress;
+			}
+		}
+		return null;
 	}
 
 	public Set<Customer> getAllCustomers() {
