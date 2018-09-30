@@ -114,7 +114,23 @@ public class ProductDAO {
 		return product;
 	}
 
-	public void updateProduct() {
+	public void updateProduct(String category, String name, int quantity, int sellerId, Product product) {
+		Connection connection = DBConnection.getDatabaseConnection();
+		try {
+			Statement updateStatement = connection.createStatement();
+			
+			String updateQuery = "UPDATE Product SET Name='"+ name + "', Category='" + category + "', Quantity=" + quantity + ", SellerId=" + sellerId + ", WHERE ID='" + product.getID() + "')";
+			updateStatement.executeUpdate(updateQuery);		
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
 	}
 
 	public void deleteProduct(int id) {

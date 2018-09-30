@@ -1,8 +1,8 @@
 package src.main.logic;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
-
+import java.util.List;
 import src.main.dal.AddressDAO;
 import src.main.dal.BillingInformationDAO;
 import src.main.dal.CustomerDAO;
@@ -30,8 +30,10 @@ public class CustomerLogic {
 		customerDAO.deleteCustomer(id);
 	}
 	
-	public Set<Customer> getCustomers(){
-		return customerDAO.getAllCustomers();
+	public List<Customer> getCustomers(){
+		List<Customer> customers = new ArrayList<Customer>();
+		customers.addAll(customerDAO.getAllCustomers());
+		return customers;
 	}
 	
 	public void updateCustomer(String firstName, String lastName, int id) {

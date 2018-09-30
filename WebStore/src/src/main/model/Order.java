@@ -8,7 +8,21 @@ public class Order {
 	Seller seller;
 	Product product;
 	Date orderDate;
+	String status;
 	
+	public Order() {}
+	
+	public Order(int ID, Customer customer, Seller seller, Product product, Date orderDate, String status) {
+		super();
+		this.ID = ID;
+		this.customer = customer;
+		this.seller = seller;
+		this.product = product;
+		this.orderDate = orderDate;
+		this.status = status;
+	}
+
+
 	public void print() {
 		
 		System.out.println("\nOrder:" + this.ID);
@@ -17,6 +31,16 @@ public class Order {
 		this.product.print();
 		
 	}
+	
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Date getOrderDate() {
 		return orderDate;
 	}

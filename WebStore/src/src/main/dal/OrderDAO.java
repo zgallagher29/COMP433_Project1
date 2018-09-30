@@ -27,6 +27,7 @@ public class OrderDAO {
 
 			Order.setID(resultSet.getInt("ID"));
 			Order.setOrderDate(resultSet.getDate("OrderDate"));
+			Order.setStatus(resultSet.getString("Status"));
 			
 			int custId = resultSet.getInt("CustomerId");
 			Order.setCustomer(getCustomerById(custId));
@@ -117,7 +118,7 @@ public class OrderDAO {
 		return orders;
 	}
 
-	public Order addOrder(java.util.Date orderDate, int customerId, int sellerId, int productId) {
+	public Order addOrder(String status, java.util.Date orderDate, int customerId, int sellerId, int productId) {
 
 		Order Order = new Order();
 		Random randomGenerator = new Random();
@@ -125,15 +126,19 @@ public class OrderDAO {
 		
 		Order.setID(randomInt);
 		Order.setOrderDate(orderDate);
+		Order.setStatus(status);
+		Order.setCustomer(getCustomerById(customerId));
+		Order.setSeller(getSellerById(sellerId));
+		Order.setProduct(getProductById(productId));
 		
 		Connection connection = DBConnection.getDatabaseConnection();
 
 		try {
 			Statement insertStatement = connection.createStatement();
 
-			String insertQuery = "INSERT INTO Orders (ID,OrderDate,CustomerId,ProductId,SellerId)" + "VALUES(" + Order.getID() + ",'"
+			String insertQuery = "INSERT INTO Orders (ID,OrderDate,CustomerId,ProductId,SellerId,Status)" + "VALUES(" + Order.getID() + ",'"
 					+ Order.getOrderDate() + "'," + customerId 
-					+ "," + productId + "," + sellerId + ")";
+					+ "," + productId + "," + sellerId + ",'" + status + "')";
 			insertStatement.executeUpdate(insertQuery);
 
 		} catch (SQLException se) {
@@ -150,7 +155,24 @@ public class OrderDAO {
 		return Order;
 	}
 
-	public void updateOrder() {
+	public Order updateOrder(String status, java.util.Date orderDate, int customerId, int sellerId, int productId, Order order) {
+		Connection connection = DBConnection.getDatabaseConnection();
+		try {
+			Statement updateStatement = connection.createStatement();
+			
+			String updateQuery = "UPDATE Orders SET Date='"+ orderDate + "', CustomerId=" + customerId + ", SellerId=" + sellerId + ", ProductId=" + productId + ", Status='" + status + "' WHERE ID='" + order.getID() + "')";
+			updateStatement.executeUpdate(updateQuery);		
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return new Order(order.getID(), getCustomerById(customerId), getSellerById(sellerId), getProductById(productId), orderDate, status);
 	}
 
 	public void deleteOrder(int id) {

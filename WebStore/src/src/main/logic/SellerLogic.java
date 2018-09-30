@@ -1,10 +1,8 @@
 package src.main.logic;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import src.main.dal.ProductDAO;
 import src.main.dal.SellerDAO;
@@ -28,8 +26,10 @@ public class SellerLogic {
 		sellerDAO.deleteSeller(id);
 	}
 
-	public Set<Seller> getSellers() {
-		return sellerDAO.getAllSellers();
+	public List<Seller> getSellers() {
+		List<Seller> sellers = new ArrayList<Seller>();
+		sellers.addAll(sellerDAO.getAllSellers());
+		return sellers;
 	}
 
 	public void updateSeller(String name, int id) {
@@ -67,6 +67,10 @@ public class SellerLogic {
 		/** Update the object's list of current products */
 		seller.setProducts(getCurrentSellerProducts(seller));
 		return seller;
+	}
+	
+	public void removeSellerProduct(int productId) {
+		productDAO.deleteProduct(productId);
 	}
 
 	public List<Product> getCurrentSellerProducts(Seller seller) {
