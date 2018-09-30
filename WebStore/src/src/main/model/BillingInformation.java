@@ -10,6 +10,18 @@ public class BillingInformation {
 	int securityCode;
 	String nameOnCard;
 	
+	public BillingInformation() {}
+	
+	public BillingInformation(int ID, int customerId, String cardNumber, Date expirationDate, int securityCode,
+			String nameOnCard) {
+		this.ID = ID;
+		this.customerId = customerId;
+		this.cardNumber = cardNumber;
+		this.expirationDate = expirationDate;
+		this.securityCode = securityCode;
+		this.nameOnCard = nameOnCard;
+	}
+
 	public void print() {
 		System.out.println("\nName on Card:" + this.nameOnCard);
 		System.out.println("Card Number: " + this.cardNumber);

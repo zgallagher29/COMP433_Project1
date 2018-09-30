@@ -102,14 +102,12 @@ public class CustomerDAO {
 
 	public Customer addCustomer(String firstName, String lastName) {
 
-		Customer customer = new Customer();
+		Customer customer = new Customer(firstName, lastName);
 		Random randomGenerator = new Random();
 		int randomInt = randomGenerator.nextInt(10000);
 		
 		customer.setId(randomInt);
-		customer.setFirstName(firstName);
-		customer.setLastName(lastName);
-		
+	
 		Connection connection = DBConnection.getDatabaseConnection();
 
 		try {
@@ -133,7 +131,23 @@ public class CustomerDAO {
 		return customer;
 	}
 
-	public void updateCustomer() {
+	public void updateCustomer(String firstName, String lastName, int id) {
+		Connection connection = DBConnection.getDatabaseConnection();
+		try {
+			Statement updateStatement = connection.createStatement();
+			
+			String updateQuery = "UPDATE Customer SET FirstName='"+ firstName + "', LastName='" + lastName +"' WHERE ID='" + id + "')";
+			updateStatement.executeUpdate(updateQuery);		
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
 	}
 
 	public void deleteCustomer(int id) {

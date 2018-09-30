@@ -12,7 +12,6 @@ public class AddressDAO {
 	public Address getAddress(int id) {
 
 		Address address = new Address();
-
 		Connection connection = DBConnection.getDatabaseConnection();
 
 		try {
@@ -42,7 +41,6 @@ public class AddressDAO {
 				}
 			}
 		}
-
 		return address;
 	}
 
@@ -116,15 +114,31 @@ public class AddressDAO {
 				}
 			}
 		}
-
 		return address;
 	}
 
-	public void updateAddress() {
+	public Address updateAddress(String city, String state, String country, String streetName, String streetNameTwo,
+			int zip, int customerId, int id) {
+		Connection connection = DBConnection.getDatabaseConnection();
+		try {
+			Statement updateStatement = connection.createStatement();
+			
+			String updateQuery = "UPDATE Address SET StreetName='"+ streetName + "', State='" + state + "' CustomerId=" + customerId + ", StreetNameTwo='" + streetNameTwo + "', City='" + city + "', Country='" + country + "', Zip=" + zip + " WHERE ID='" + id + "')";
+			updateStatement.executeUpdate(updateQuery);		
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return new Address(streetName, streetNameTwo, city, country, state, zip, id, customerId);	
 	}
 
 	public void deleteAddress(int id) {
-
 		Connection connection = DBConnection.getDatabaseConnection();
 		
 		try {

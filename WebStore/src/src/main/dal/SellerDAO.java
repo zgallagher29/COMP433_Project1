@@ -123,7 +123,23 @@ public class SellerDAO {
 		return Seller;
 	}
 
-	public void updateSeller() {
+	public void updateSeller(String name, int id) {
+		Connection connection = DBConnection.getDatabaseConnection();
+		try {
+			Statement updateStatement = connection.createStatement();
+			
+			String updateQuery = "UPDATE Seller SET Name='"+ name + "' WHERE ID='" + id + "')";
+			updateStatement.executeUpdate(updateQuery);		
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
 	}
 
 	public void deleteSeller(int id) {

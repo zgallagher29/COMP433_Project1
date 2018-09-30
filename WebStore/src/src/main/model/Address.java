@@ -10,6 +10,22 @@ public class Address {
 	int ID;
 	int customerId;
 	
+	public Address() {}
+	
+	
+	public Address(String streetName, String streetNameTwo, String city, String country, String state, int zip, int ID,
+			int customerId) {
+		this.streetName = streetName;
+		this.streetNameTwo = streetNameTwo;
+		this.city = city;
+		this.country = country;
+		this.state = state;
+		this.zip = zip;
+		this.ID = ID;
+		this.customerId = customerId;
+	}
+
+
 	public int getCustomerId() {
 		return customerId;
 	}

@@ -8,6 +8,13 @@ public class Customer {
 	Address address;
 	BillingInformation billingInformation;
 	
+	public Customer() {}
+	
+	public Customer(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;		
+	}
+	
 	public void print() {
 		System.out.println("\nCustomer Name: " + this.firstName + " " + this.lastName);		
 		this.address.print();

@@ -8,6 +8,10 @@ public class Seller {
 	String name;
 	List<Product> products;
 	
+	public Seller() {}
+	public Seller(String name) {
+		this.name = name;
+	}
 	public void print() {
 		System.out.println("\nSeller Name: "+ this.name);
 		for (Product p : products) {

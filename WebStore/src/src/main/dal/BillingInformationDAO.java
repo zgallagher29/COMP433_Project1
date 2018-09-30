@@ -117,7 +117,24 @@ public class BillingInformationDAO {
 		return BillingInformation;
 	}
 
-	public void updateBillingInformation() {
+	public BillingInformation updateBillingInformation(String cardNumber, int customerId, Date expirationDate, String nameOnCard, int securityCode, int id) {
+		Connection connection = DBConnection.getDatabaseConnection();
+		try {
+			Statement updateStatement = connection.createStatement();
+			
+			String updateQuery = "UPDATE BillingInformation SET CreditCardNumber='"+ cardNumber + "', CustomerId=" + customerId + ", ExpirationDate='" + expirationDate + "', NameOnCard='" + nameOnCard + "', SecurityCode=" + securityCode + " WHERE ID='" + id + "')";
+			updateStatement.executeUpdate(updateQuery);		
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return new BillingInformation(id,customerId,cardNumber,expirationDate,securityCode,nameOnCard);
 	}
 
 	public void deleteBillingInformation(int id) {
