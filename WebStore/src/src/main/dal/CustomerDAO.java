@@ -26,8 +26,9 @@ public class CustomerDAO {
 			resultSet.next();
 
 			customer.setId(id);
-			customer.setLastName(resultSet.getString("lastName"));
-			customer.setFirstName(resultSet.getString("firstName"));		
+			customer.setPhoneNumber(resultSet.getString("PhoneNumber"));
+			customer.setLastName(resultSet.getString("LastName"));
+			customer.setFirstName(resultSet.getString("FirstName"));		
 			customer.setAddress(getAddressByCustId(id));
 			customer.setBillingInformation(getBillingInfoByCustId(id));
 			
@@ -100,9 +101,9 @@ public class CustomerDAO {
 		return customers;
 	}
 
-	public Customer addCustomer(String firstName, String lastName) {
+	public Customer addCustomer(String firstName, String lastName, String phoneNumber) {
 
-		Customer customer = new Customer(firstName, lastName);
+		Customer customer = new Customer(firstName, lastName, phoneNumber);
 		Random randomGenerator = new Random();
 		int randomInt = randomGenerator.nextInt(10000);
 		
@@ -113,8 +114,8 @@ public class CustomerDAO {
 		try {
 			Statement insertStatement = connection.createStatement();
 
-			String insertQuery = "INSERT INTO Customer (ID,firstName,lastName)" + "VALUES(" + customer.getId() + ",'"
-					+ customer.getFirstName() + "','" + customer.getLastName() + "')";
+			String insertQuery = "INSERT INTO Customer (ID,FirstName,LastName,PhoneNumber)" + "VALUES(" + customer.getId() + ",'"
+					+ customer.getFirstName() + "','" + customer.getLastName() + "', PhoneNumber='" + customer.getPhoneNumber() + "')";
 			insertStatement.executeUpdate(insertQuery);
 
 		} catch (SQLException se) {
@@ -131,12 +132,12 @@ public class CustomerDAO {
 		return customer;
 	}
 
-	public void updateCustomer(String firstName, String lastName, int id) {
+	public void updateCustomer(String firstName, String lastName, String phoneNumber, int id) {
 		Connection connection = DBConnection.getDatabaseConnection();
 		try {
 			Statement updateStatement = connection.createStatement();
 			
-			String updateQuery = "UPDATE Customer SET FirstName='"+ firstName + "', LastName='" + lastName +"' WHERE ID='" + id + "')";
+			String updateQuery = "UPDATE Customer SET FirstName='"+ firstName + "', LastName='" + lastName +"', PhoneNumber='" + phoneNumber + "' WHERE ID='" + id + "')";
 			updateStatement.executeUpdate(updateQuery);		
 			
 		}catch(SQLException se) {

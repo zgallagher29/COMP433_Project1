@@ -39,7 +39,7 @@ public class SellerLogic {
 	public Seller addSellerProducts(Seller seller, List<Product> products) {
 		List<Product> addedProducts = new ArrayList<Product>();
 		for (Product p : products) {
-			Product added = productDAO.addProduct(p.getCategory(), p.getName(), p.getQuantity(), seller.getID());
+			Product added = productDAO.addProduct(p.getCategory(), p.getName(), p.getQuantity(), seller.getID(), p.getCost());
 			addedProducts.add(added);
 		}
 		seller.setProducts(addedProducts);
@@ -60,7 +60,7 @@ public class SellerLogic {
 		/** Vice versa: if the new list has something not in the DB, add new product */
 		for (Product p : products) {
 			if (!currentSellerProducts.contains(p)) {
-				productDAO.addProduct(p.getCategory(), p.getName(), p.getQuantity(), seller.getID());
+				productDAO.addProduct(p.getCategory(), p.getName(), p.getQuantity(), seller.getID(), p.getCost());
 			}
 		}
 

@@ -7,13 +7,42 @@ public class Product {
 	String name;
 	int quantity;
 	int sellerId;
+	double cost;
 	
+	public Product() {}
+	
+	public Product(int ID, String category, String name, int quantity, int sellerId, double cost) {
+		this.ID = ID;
+		this.category = category;
+		this.name = name;
+		this.quantity = quantity;
+		this.sellerId = sellerId;
+		this.cost = cost;
+	}
+	
+	public Product( String category, String name, int quantity, int sellerId, double cost) {
+		this.category = category;
+		this.name = name;
+		this.quantity = quantity;
+		this.sellerId = sellerId;
+		this.cost = cost;
+	}
+
 	public void print() {
 		System.out.println("\nProduct Name: " + this.name);
 		System.out.println("Category: " + this.category);
 		System.out.println("Quantity: " + this.quantity);
 		System.out.println("Seller ID: " + this.sellerId);
 	}
+	
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
 	public int getID() {
 		return ID;
 	}

@@ -1,25 +1,24 @@
 package src.main.model;
 
-import java.util.Date;
-
 public class Order {
 	int ID;
 	Customer customer;
 	Seller seller;
 	Product product;
-	Date orderDate;
+	String orderDate;
 	String status;
+	double cost;
 	
 	public Order() {}
 	
-	public Order(int ID, Customer customer, Seller seller, Product product, Date orderDate, String status) {
-		super();
+	public Order(int ID, Customer customer, Seller seller, Product product, String orderDate, String status, double cost) {
 		this.ID = ID;
 		this.customer = customer;
 		this.seller = seller;
 		this.product = product;
 		this.orderDate = orderDate;
 		this.status = status;
+		this.cost = cost;
 	}
 
 
@@ -27,12 +26,21 @@ public class Order {
 		
 		System.out.println("\nOrder:" + this.ID);
 		System.out.println("Order Date: " + this.orderDate.toString());
+		System.out.println("Cost: " + this.cost);
 		this.customer.print();
 		this.product.print();
 		
 	}
 	
 	
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -41,10 +49,10 @@ public class Order {
 		this.status = status;
 	}
 
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 	public int getID() {

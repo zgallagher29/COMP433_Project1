@@ -28,7 +28,7 @@ public class SellerDAO {
 			String selectQuery = "SELECT * from Seller where ID='" + id + "'";
 			ResultSet resultSet = selectStatement.executeQuery(selectQuery);
 			resultSet.next();
-
+			Seller.setID(resultSet.getInt("ID"));
 			Seller.setName(resultSet.getString("Name"));
 			Seller.setProducts(getProductsBySellerId(id));
 			

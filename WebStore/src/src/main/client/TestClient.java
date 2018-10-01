@@ -1,24 +1,33 @@
 package src.main.client;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.text.ParseException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
-import src.main.dal.OrderDAO;
+
+import src.main.logic.CustomerLogic;
+import src.main.logic.OrderLogic;
+import src.main.logic.ProductLogic;
+import src.main.logic.SellerLogic;
 import src.main.model.*;
 
 public class TestClient {
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws ParseException {
 		
-		OrderDAO om = new OrderDAO();
-		Set<Order> orders = om.getAllOrders();
+		OrderLogic ologic = new OrderLogic();
+		ProductLogic plogic = new ProductLogic();
+		CustomerLogic clogic = new CustomerLogic();
+		SellerLogic slogic = new SellerLogic();
 		
-		if (!orders.isEmpty()) {
-			for (Iterator<Order> it = orders.iterator(); it.hasNext(); ) {
-				Order order = it.next();
-				order.print();
-			}
-			
-		}		
+		
+		for (Customer c : clogic.getCustomers()) {
+			c.print();
+		}
+		
+		for (Order o : ologic.getOrders()) {
+			o.print();
+		}
 	}
 }

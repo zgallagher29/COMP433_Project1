@@ -5,14 +5,16 @@ public class Customer {
 	int id;
 	String firstName;
 	String lastName;
+	String phoneNumber;
 	Address address;
 	BillingInformation billingInformation;
 	
 	public Customer() {}
 	
-	public Customer(String firstName, String lastName) {
+	public Customer(String firstName, String lastName, String phoneNumber) {
 		this.firstName = firstName;
-		this.lastName = lastName;		
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
 	}
 	
 	public void print() {
@@ -21,6 +23,15 @@ public class Customer {
 		this.billingInformation.print();
 	}
 	
+	
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	public Address getAddress() {
 		return address;
 	}

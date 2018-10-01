@@ -22,8 +22,8 @@ public class CustomerLogic {
 		this.addressDAO = new AddressDAO();
 	}
 	
-	public Customer addCustomer(String firstName, String lastName) {
-		return customerDAO.addCustomer(firstName, lastName);
+	public Customer addCustomer(String firstName, String lastName, String phoneNumber) {
+		return customerDAO.addCustomer(firstName, lastName, phoneNumber);
 	}
 	
 	public void removeCustomer(int id) {
@@ -36,8 +36,8 @@ public class CustomerLogic {
 		return customers;
 	}
 	
-	public void updateCustomer(String firstName, String lastName, int id) {
-		customerDAO.updateCustomer(firstName,lastName,id);
+	public void updateCustomer(String firstName, String lastName, String phoneNumber, int id) {
+		customerDAO.updateCustomer(firstName,lastName,phoneNumber,id);
 	}
 	
 	public Customer addCustomerAddress(String city, String state, String country, String streetName, String streetNameTwo,
@@ -75,6 +75,6 @@ public class CustomerLogic {
 	}
 	
 	public void writeReview(int productId, Customer customer) {
-		
+		// TODO: this method
 	}
 }

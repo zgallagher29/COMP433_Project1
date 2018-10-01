@@ -30,7 +30,8 @@ public class ProductDAO {
 			Product.setName(resultSet.getString("Name"));
 			Product.setQuantity(resultSet.getInt("Quantity"));
 			Product.setSellerId(resultSet.getInt("SellerId"));
-
+			Product.setCost(resultSet.getDouble("Cost"));
+			
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} finally {
@@ -78,7 +79,7 @@ public class ProductDAO {
 		return products;
 	}
 
-	public Product addProduct(String category, String name, int quantity, int sellerId) {
+	public Product addProduct(String category, String name, int quantity, int sellerId, double cost) {
 
 		Product product = new Product();
 		Random randomGenerator = new Random();
@@ -89,15 +90,16 @@ public class ProductDAO {
 		product.setName(name);
 		product.setQuantity(quantity);
 		product.setSellerId(sellerId);
+		product.setCost(cost);
 		
 		Connection connection = DBConnection.getDatabaseConnection();
 
 		try {
 			Statement insertStatement = connection.createStatement();
 
-			String insertQuery = "INSERT INTO Product (ID,Category,Name,Quantity,SellerId)" + "VALUES(" + product.getID() + ",'"
+			String insertQuery = "INSERT INTO Product (ID,Category,Name,Quantity,SellerId,Cost)" + "VALUES(" + product.getID() + ",'"
 					+ product.getCategory() + "','" + product.getName() 
-					+ "'," + product.getQuantity() + "," + product.getSellerId() + ")";
+					+ "'," + product.getQuantity() + "," + product.getSellerId() + ", Cost=" + cost + ")";
 			insertStatement.executeUpdate(insertQuery);
 
 		} catch (SQLException se) {
@@ -114,12 +116,12 @@ public class ProductDAO {
 		return product;
 	}
 
-	public void updateProduct(String category, String name, int quantity, int sellerId, Product product) {
+	public Product updateProduct(String category, String name, int quantity, int sellerId, double cost, Product product) {
 		Connection connection = DBConnection.getDatabaseConnection();
 		try {
 			Statement updateStatement = connection.createStatement();
 			
-			String updateQuery = "UPDATE Product SET Name='"+ name + "', Category='" + category + "', Quantity=" + quantity + ", SellerId=" + sellerId + ", WHERE ID='" + product.getID() + "')";
+			String updateQuery = "UPDATE Product SET Name='"+ name + "', Category='" + category + "', Quantity=" + quantity + ", SellerId=" + sellerId + ", Cost=" + cost + " WHERE ID=" + product.getID() ;
 			updateStatement.executeUpdate(updateQuery);		
 			
 		}catch(SQLException se) {
@@ -131,6 +133,7 @@ public class ProductDAO {
 				} catch (SQLException e) {}
 			}
 		}
+		return new Product(product.getID(),category,name,quantity,sellerId,cost);
 	}
 
 	public void deleteProduct(int id) {
